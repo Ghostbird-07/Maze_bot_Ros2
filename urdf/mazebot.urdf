@@ -1,0 +1,317 @@
+<?xml version="1.0" ?>
+  <robot name="mazebot">
+  <link name="base_footprint">
+    <visual>
+      <geometry>
+          <box size="0.75 0.4 0.1"/>
+      </geometry>
+      <material name="gray">
+        <color rgba=".2 .2 .2 1" />
+      </material>
+    </visual>
+  <inertial>
+            <mass value="1" />
+            <inertia ixx="0.01" ixy="0.0" ixz="0" 
+            iyy="0.01" iyz="0" izz="0.01" />
+    </inertial>
+    <collision>
+      <geometry>
+          <box size="0.75 0.4 0.1"/>
+      </geometry>
+      
+    </collision>
+  </link>
+
+  <link name="wheel_right_link">
+    <inertial>
+            <mass value="2" />
+            <inertia ixx="0.01" ixy="0.0" ixz="0" 
+            iyy="0.01" iyz="0" izz="0.01" />
+    </inertial>
+
+    <visual>
+      
+      <geometry>
+          <cylinder radius="0.15" length="0.1"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+
+    <collision>
+    
+      <geometry>
+          <cylinder radius="0.15" length="0.1"/>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>0</mu>
+            <mu2>0</mu2>
+            <slip1>1.0</slip1>
+            <slip2>1.0</slip2>
+          </ode>
+        </friction>
+      </surface>
+      <contact_coefficients mu="1" kp="1e+13" kd="1.0"/>
+    </collision>
+  </link>
+
+  <joint name="wheel_right_joint" type="continuous">
+    <origin xyz="0.2 0.25 0.0" rpy="1.57 0.0 0.0"/>
+    <parent link="base_footprint"/>
+    <child link="wheel_right_link"/>
+    <axis xyz="0.0 0.0 1.0"/>
+  </joint>
+
+  <link name="wheel_left_link">
+    <inertial>
+            <mass value="2" />
+            <inertia ixx="0.01" ixy="0.0" ixz="0" 
+            iyy="0.01" iyz="0" izz="0.01" />
+    </inertial>
+
+    <visual>
+      
+      <geometry>
+          <cylinder radius="0.15" length="0.1"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+
+    <collision>
+      <geometry>
+          <cylinder radius="0.15" length="0.1"/>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>0</mu>
+            <mu2>0</mu2>
+            <slip1>1.0</slip1>
+            <slip2>1.0</slip2>
+          </ode>
+        </friction>
+      </surface>
+      <contact_coefficients mu="1" kp="1e+13" kd="1.0"/>
+    </collision>
+  </link>
+
+  <joint name="wheel_left_joint" type="continuous">
+    <origin xyz="0.2 -0.25 0.0" rpy="1.57 0.0 0.0"/>
+    <parent link="base_footprint"/>
+    <child link="wheel_left_link"/>
+    <axis xyz="0.0 0.0 1.0"/>
+
+  </joint>
+
+
+
+  <link name="caster">
+    <inertial>
+            <mass value="1" />
+            <inertia ixx="0.01" ixy="0.0" ixz="0" 
+            iyy="0.01" iyz="0" izz="0.01" />
+    </inertial>
+
+    <visual>
+    
+      <geometry>
+        <sphere radius=".08" />
+      </geometry>
+      <material name="white" />
+    </visual>
+
+    <collision>
+      <geometry>
+        <sphere radius=".08" />
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>0</mu>
+            <mu2>0</mu2>
+            <slip1>1.0</slip1>
+            <slip2>1.0</slip2>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+  </link>
+
+  <joint name="caster_joint" type="continuous">
+    <origin xyz="-0.3 0.0 -0.07" rpy="0.0 0.0 0.0"/>
+    <axis xyz="0 0 1" />
+    <parent link="base_footprint"/>
+    <child link="caster"/>
+  </joint>
+
+    <!-- laser -->
+  <link name="laser">
+    <inertial>
+            <mass value="1" />
+            <inertia ixx="0.01" ixy="0.0" ixz="0" 
+            iyy="0.01" iyz="0" izz="0.01" />
+    </inertial>
+    <visual>
+    
+      <geometry>
+        <cylinder radius="0.05" length="0.05"/> 
+       </geometry>
+    </visual>
+    <collision>
+      <origin/>
+      <geometry>
+        <sphere radius=".08" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="laser_joint" type="fixed">
+    <origin xyz="-0.32 0.0 0.08" rpy="0.0 0.0 3.14"/>
+    <axis xyz="0 0 1" />
+    <parent link="base_footprint"/>
+    <child link="laser"/>
+  </joint>
+  <!-- camera -->
+  <link name="camera_link">
+
+    <visual>
+    
+      <geometry>
+           <box size="0.05 0.04 0.05"/>
+       </geometry>
+    </visual>
+
+    
+  </link>
+
+  <joint name="camera_joint" type="fixed">
+    <origin xyz="-0.32 0.0 0.14" rpy="0.0 0.0 0.0"/>
+    <axis xyz="0 0 1" />
+    <parent link="base_footprint"/>
+    <child link="camera_link"/>
+  </joint>
+
+    <gazebo reference="camera_link">
+        <sensor type="camera" name="Botcamera">
+          <update_rate>30.0</update_rate>
+          <camera name="head">
+            <horizontal_fov>1.3962634</horizontal_fov>
+            <image>
+              <width>800</width>
+              <height>800</height>
+              <format>R8G8B8</format>
+            </image>
+            <clip>
+              <near>0.02</near>
+              <far>300</far>
+            </clip>
+            <noise>
+              <type>gaussian</type>
+              <mean>0.0</mean>
+              <stddev>0.007</stddev>
+            </noise>
+          </camera>
+          <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+            <alwaysOn>true</alwaysOn>
+            <updateRate>0.0</updateRate>
+            <cameraName>/Botcamera</cameraName>
+            <imageTopicName>image_raw</imageTopicName>
+            <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+            <frameName>camera_link</frameName>
+            <hackBaseline>0.07</hackBaseline>
+          </plugin>
+        </sensor>
+        <material>Gazebo/Blue</material>
+      </gazebo>
+
+
+
+  
+
+<!-- Gazebo colors to links as upper defined colors are only visible in RVIZ-->
+<gazebo reference="base_footprint">
+  <material>Gazebo/Orange</material>
+</gazebo>
+<gazebo reference="caster">
+  <material>Gazebo/Black</material>
+</gazebo>
+
+<gazebo reference="wheel_right_link">
+  <material>Gazebo/Blue</material>
+</gazebo>
+<gazebo reference="wheel_left_link">
+  <material>Gazebo/Blue</material>
+</gazebo> 
+
+
+<!-- DIFFENERNTIAL DRIVE-->
+<gazebo>
+  <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+
+    <!-- Plugin update rate in Hz -->
+    <update_rate>20</update_rate>
+    <left_joint>wheel_left_joint</left_joint>
+    <right_joint>wheel_right_joint</right_joint>
+    <wheel_separation>0.25</wheel_separation>
+    <wheel_diameter>0.07</wheel_diameter>
+    <wheelAcceleration>1.0</wheelAcceleration>
+    <wheelTorque>20</wheelTorque>
+    <commandTopic>cmd_vel</commandTopic>
+    <odometryTopic>odom</odometryTopic>
+    <odometry_frame>odom</odometry_frame>
+    <robotBaseFrame>base_footprint</robotBaseFrame>
+    <odometrySource>1</odometrySource>
+    <publishWheelTF>true</publishWheelTF>
+    <publish_odom>true</publish_odom>
+    <publish_odom_tf>true</publish_odom_tf>
+    <publishWheelJointState>true</publishWheelJointState>
+    <legacyMode>false</legacyMode>
+  </plugin>
+</gazebo>
+
+
+ <gazebo>
+  <plugin name="joint_state_publisher"
+          filename="libgazebo_ros_joint_state_publisher.so">
+      <joint_name>caster_joint</joint_name>
+    <update_rate>20</update_rate>
+
+
+  </plugin>
+</gazebo>
+  
+<!-- laser plugin -->
+
+
+<gazebo reference="laser">
+  <sensor type="ray" name="laser">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>true</visualize>
+      <update_rate>40</update_rate>
+      <ray>
+          <scan>
+              <horizontal>
+                  <samples>720</samples>
+                  <resolution>1</resolution>
+                  <min_angle>-1.578</min_angle>
+                  <max_angle>1.578</max_angle>
+              </horizontal>
+          </scan>
+          <range>
+              <min>0.1</min>
+              <max>5</max>
+              <resolution>0.1</resolution>
+          </range>
+      </ray>
+      <plugin name="Lidar" filename="libgazebo_ros_laser.so">
+          <topicName>/scan</topicName>
+          <frameName>laser</frameName>
+      </plugin>
+  </sensor>
+</gazebo>
+
+</robot>
