@@ -18,7 +18,7 @@ class VelocityPublisher(Node):
         msg.linear.x = 0.0
         msg.angular.z = 0.7
         self.publisher_.publish(msg)
-        # self.get_logger().info('Publishing: "%s"' % msg.data)
+        self.get_logger().info('Publishing: "%s"' % msg.data)
 
 
 def main(args=None):
