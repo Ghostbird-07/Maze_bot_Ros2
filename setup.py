@@ -20,7 +20,7 @@ setup(
     install_requires=['setuptools'],
     zip_safe=True,
     maintainer='luqman',
-    maintainer_email='noshluk2@gmail.com',
+    maintainer_email='anshulchoudhary931@gmail.com',
     description='TODO: Package description',
     license='TODO: License declaration',
     tests_require=['pytest'],
