@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <!-- Inertial macro for box -->
+  <xacro:macro name="box_inertial" params="mass x y z">
+    <inertial>
+      <mass value="${mass}" />
+      <inertia ixx="${mass*(y*y+z*z)/12}" ixy="0.0" ixz="0" 
+        iyy="${mass*(x*x+z*z)/12}" iyz="0" izz="${mass*(x*x+y*y)/12}" />
+    </inertial>
+  </xacro:macro>
+  
+  <!-- Inertial macro for cylinder -->
+  <xacro:macro name="cylinder_inertial" params="mass radius length">
+    <inertial>
+      <mass value="${mass}" />
+      <inertia ixx="${mass*(3*radius*radius+length*length)/12}" ixy="0.0" ixz="0" 
+        iyy="${mass*(3*radius*radius+length*length)/12}" iyz="0" izz="${mass*radius*radius/2}" />
+    </inertial>
+  </xacro:macro>
+  
+  <!-- Inertial macro for sphere -->
+  <xacro:macro name="sphere_inertial" params="mass radius">
+    <inertial>
+      <mass value="${mass}" />
+      <inertia ixx="${2*mass*radius*radius/5}" ixy="0.0" ixz="0" 
+        iyy="${2*mass*radius*radius/5}" iyz="0" izz="${2*mass*radius*radius/5}" />
+    </inertial>
+  </xacro:macro>
+  
+  <!-- Simple inertial with fixed values for basic components -->
+  <xacro:macro name="simple_inertial" params="mass">
+    <inertial>
+      <mass value="${mass}" />
+      <inertia ixx="0.01" ixy="0.0" ixz="0" 
+        iyy="0.01" iyz="0" izz="0.01" />
+    </inertial>
+  </xacro:macro>
+</robot>

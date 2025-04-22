@@ -1,31 +1,3 @@
-'''
-> Purpose :
-Module to perform motionplanning for helping the vehicle navigate to the desired destination
-
-> Usage :
-You can perform motionplanning by
-1) Importing the class (bot_motionplanner)
-2) Creating its object
-3) Accessing the object's function of (nav_path). 
-E.g ( self.bot_motionplanner.nav_path(bot_loc, path, self.vel_msg, self.velocity_publisher) )
-
-
-> Inputs:
-1) Robot Current location
-2) Found path to destination
-3) Velocity object for manipulating linear and angular component of robot
-4) Velocity publisher to publish the updated velocity object
-
-> Outputs:
-1) speed              => Speed with which the car travels at any given moment
-2) angle              => Amount of turning the car needs to do at any moment
-
-Author :
-Haider Abbasi
-
-Date :
-6/04/22
-'''
 import cv2
 import numpy as np
 from math import pow , atan2,sqrt , degrees,asin

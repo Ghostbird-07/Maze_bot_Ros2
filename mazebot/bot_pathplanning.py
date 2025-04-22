@@ -1,32 +1,4 @@
-'''
-> Purpose :
-Module to perform pathplanning from source to destination using provided methods.
-                                                                         [DFS,DFS_Shortest,Dijisktra,Astar]
-
-> Usage :
-You can perform pathplanning by
-1) Importing the class (bot_pathplanner)
-2) Creating its object
-3) Accessing the object's function of (find_path_nd_display). 
-E.g ( self.bot_pathplanner.find_path_nd_display(self.bot_mapper.Graph.graph, start, end, maze,method="a_star") )
-
-
-> Inputs:
-1) Graph extracted in mapping stage
-2) Source & Destination
-3) Maze Image
-4) Method to Use [DFS,DFS_Shortest,Dijisktra,Astar]
-
-> Outputs:
-1) self.path_to_goal      => Computed Path from Source to destination [List of Cordinates]
-2) self.img_shortest_path => Found path Overlayed (In Color) on Image
-
-Author :
-Haider Abbasi
-
-Date :
-6/04/22
-'''
+# -*- coding: utf-8 -*-
 import cv2
 import numpy as np
 from numpy import sqrt
